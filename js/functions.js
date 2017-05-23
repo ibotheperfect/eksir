@@ -3,7 +3,7 @@
  */
 
 function get_gundem(url) {
-    $.get(url,{ cache: false }, function (data) {
+    $.get(url, function (data) {
         var html = $.parseHTML(data);
 
         //remove advertisement
@@ -36,11 +36,11 @@ $(document).ready(function () {
         setintervalid = setInterval(function() {
 
             //get title
-            $.get(basliklink, {cache: false}, function (data) {
+            $.get(basliklink, function (data) {
                 var html = $.parseHTML(data);
                 var pagecount = $(html).find(".pager").first().attr("data-pagecount");
                 //get lasest page
-                $.get(basliklink + "?p=" + pagecount, {cache: false}, function (data) {
+                $.get(basliklink + "?p=" + pagecount, function (data) {
                     var html = $.parseHTML(data);
                     entryid =  $(html).find("#entry-list li").last().attr("data-id");
                     if (entryid != lastentryid) {
