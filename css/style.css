@@ -1,3 +1,23 @@
-#gundem {
-    width: 30%;
+#header-bar {
+
+    height: 40px;
+    background-color: #81c14b;
+}
+
+#gundem-content{
+    width: 20%;
+    margin: 5px;
+    float: left;
+}
+
+.topic-list li{
+    margin: 10px;
+}
+
+#tabs{
+    width: 80%;
+}
+
+li a{
+    cursor: pointer;
 }

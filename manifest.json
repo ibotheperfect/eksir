@@ -8,7 +8,7 @@
 
 
   "browser_action":{
-    "default_icon": "img/icon.png",
+    "default_icon": "img/favicon.png",
     "default_title": "EkşiR - Realtime Ekşisözluk Reader"
   },
 
