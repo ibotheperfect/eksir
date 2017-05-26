@@ -6,12 +6,33 @@
 
 #gundem-content{
     width: 20%;
-    margin: 5px;
+    margin: 10px;
     float: left;
+    background: #fff1f1;
 }
 
+#gundem-content li{
+    display: block;
+}
+
+#gundem-content small{
+    color: black;
+}
+
+#gundem-content h1{
+    text-align: center;
+}
+
+
 .topic-list li{
-    margin: 10px;
+    margin: 7px;
+}
+
+.content {
+    margin-bottom: 5px;
+    overflow: hidden;
+    max-height: 237px;
+    position: relative;
 }
 
 #tabs{
@@ -20,4 +41,62 @@
 
 li a{
     cursor: pointer;
+}
+
+#entry-col{
+    float: left;
+    background: #ebebeb;
+    width: 75%;
+    min-height: 1000px;
+    margin: 10px;
+}
+
+#entry-live footer .entry-date{
+    color: #888;
+    font-size: 12px;
+    margin-right: 5px;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+#entry-live footer .entry-author{
+    margin-right: 5px;
+    white-space: nowrap;
+    color: #53a245;
+    text-decoration: none;
+    cursor: pointer;
+    touch-action: manipulation;
+    text-align: right;
+
+}
+
+#entry-live li .info {
+    float: right;
+
+
+}
+
+#entry-live li {
+    padding: 20px 10px 25px 10px;
+    display: block;
+    margin: 10px;
+    background: #f2f2f2;
+
+
+}
+
+#entry-header h1 {
+    margin: 10px;
+
+}
+#entry-header h1 a {
+    color: black;
+}
+
+#logo{
+    font-size: 30px;
+    margin-left: 55px;
+    color: white;
 }

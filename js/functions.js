@@ -18,35 +18,67 @@ function get_gundem(url) {
 
         //put content into div
         $("#gundem-content").html($(html).find("#content-body"));
-
+        $("#content-body .full-index-continue-link-container").remove();
+        $("#content-body .topic-list-description").remove();
 
     });
 }
+
+function fix_link(elem){
+    $(elem).attr("href", "https://eksisozluk.com/" + $(elem).attr("href"));
+    $(elem).attr("target","_blank" );
+}
+
 var setintervalid = 0;
-var lastentryid = 0;
 
 $(document).ready(function () {
+    $("#progresbar").progressbar();
+    $("#progresbar").progressbar("option", "value", false);
+    $("#progresbar").hide();
     get_gundem("https://eksisozluk.com/basliklar/gundem");
-    $(document).on('click', 'li a', function () {
-        $("#entry").empty();
+    $(document).on('click', '#gundem-content li a', function () {
+        $("#entry-live").empty();
+        $("#entry-header").empty();
+        $("#progresbar").show();
+        var lastentryid = 0;
+
         clearInterval(setintervalid);
         var basliklink = "https://eksisozluk.com/" + $(this).attr("data-href");
         basliklink = basliklink.replace("?a=popular", "");
-        console.log(basliklink);
-        setintervalid = setInterval(function() {
+        setintervalid = setInterval(function () {
 
             //get title
             $.get(basliklink, function (data) {
+                $("#progresbar").hide();
+
                 var html = $.parseHTML(data);
                 var pagecount = $(html).find(".pager").first().attr("data-pagecount");
+
+                if (lastentryid == 0) {
+                    $("#entry-header").empty();
+                    $("#entry-header").html($(html).find("#title"));
+                    fix_link($("#entry-header a"));
+
+
+                }
                 //get lasest page
                 $.get(basliklink + "?p=" + pagecount, function (data) {
                     var html = $.parseHTML(data);
-                    entryid =  $(html).find("#entry-list li").last().attr("data-id");
-                    if (entryid != lastentryid) {
-                        $("#entry").append($(html).find("#entry-list li .content").last().text() + "<br><br>");
-                        lastentryid = entryid;
-                    }
+                    $(html).find("#entry-list li").each(function () {
+                        var entryid = $(this).attr("data-id");
+                        if (entryid > lastentryid) {
+
+                            //fix links
+                            $(this).find(".b").each(function () {
+                                fix_link(this);
+                            });
+                            fix_link($(this).find(".entry-date"));
+                            fix_link($(this).find(".entry-author"));
+                            $("#entry-live").prepend("<li class='col'>" + $(this).html() + "</li>");
+                            lastentryid = entryid;
+                        }
+                    });
+
 
                 });
 

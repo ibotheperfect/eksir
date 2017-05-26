@@ -10,6 +10,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!--
       - JavaScript and HTML must be in separate files: see our Content Security
@@ -18,12 +19,30 @@
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/functions.js"></script>
 </head>
 <body>
-<div id="header-bar"></div>
-<div id="gundem-content"></div>
-<div id="entry"></div>
+<div id="header-bar">
+    <div id="logo">
+        <p>
+        EkşiR
+        </p>
+    </div>
+
+</div>
+
+<div id="main">
+    <div id="gundem-content"></div>
+    <div id="entry-col">
+        <div id="progresbar"></div>
+        <div id="entry-header"></div>
+        <div id="entry-live">
+            <div id="greeting">
+                <span>Canlı izlemek istediğiniz başlığa tıklayın...</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
