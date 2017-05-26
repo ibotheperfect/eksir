@@ -17,7 +17,7 @@ function get_gundem(url) {
         });
 
         //put content into div
-        $("#gundem-content").html($(html).find("#content-body"));
+        $("#gundem-content").append($(html).find("#content-body .topic-list li"));
         $("#content-body .full-index-continue-link-container").remove();
         $("#content-body .topic-list-description").remove();
 
@@ -32,6 +32,7 @@ function fix_link(elem){
 var setintervalid = 0;
 
 $(document).ready(function () {
+
     $("#progresbar").progressbar();
     $("#progresbar").progressbar("option", "value", false);
     $("#progresbar").hide();
@@ -57,6 +58,8 @@ $(document).ready(function () {
                 if (lastentryid == 0) {
                     $("#entry-header").empty();
                     $("#entry-header").html($(html).find("#title"));
+                    //add butttons
+                    //$("#entry-header").append("<button id='ilk' class='btn btn-link'>İlk</button>");
                     fix_link($("#entry-header a"));
 
 
