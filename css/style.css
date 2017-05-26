@@ -63,7 +63,7 @@ li a{
     height:900px;
 }
 
-#entry-live footer .entry-date{
+#entry-col footer .entry-date{
     color: #888;
     font-size: 12px;
     margin-right: 5px;
@@ -73,7 +73,7 @@ li a{
 
 }
 
-#entry-live footer .entry-author{
+#entry-col footer .entry-author{
     margin-right: 5px;
     white-space: nowrap;
     color: #53a245;
@@ -84,13 +84,13 @@ li a{
 
 }
 
-#entry-live li .info {
+#entry-col li .info {
     float: right;
 
 
 }
 
-#entry-live li {
+#entry-col li {
     padding: 10px 15px 25px 15px;
     display: block;
     margin: 10px;
@@ -108,7 +108,7 @@ li a{
 }
 
 #entry-header  {
-    padding-bottom: 35px;
+    padding-bottom: 10px;
 
 }
 
@@ -136,5 +136,13 @@ li a{
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+#ilk {
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 
