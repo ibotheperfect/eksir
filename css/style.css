@@ -99,7 +99,7 @@ li a{
 
     background-clip: padding-box;
     border-radius: 13px;
-    width: 98%;
+    width: 99%;
 
 
 }
@@ -112,19 +112,25 @@ li a{
 
     background-clip: padding-box;
     border-radius: 13px;
-    width: 98%;
+    width: 99%;
 
 
 }
 
 #entry-header h1 {
     margin: 10px;
+    font-size: 25px;
 
 }
 
 #entry-header  {
+
     padding-bottom: 10px;
 
+}
+
+#entry-header #sukela{
+    font-size: 15px;
 }
 
 #entry-header h1 a {
@@ -160,5 +166,15 @@ li a{
     cursor: pointer;
     overflow: hidden;
     outline: none;
+    font-size: 15px;
 }
+
+
+li{
+    font-size: 15px;
+}
+
+
+
+
 

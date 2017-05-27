@@ -186,7 +186,7 @@ $(document).ready(function () {
                 $("#entry-header").append("<button id='ilk' class='btn-link'>İlk Entry</button>");
                 $("#entry-header").append("<button id='live' value='live' style='font-weight: bold;' class='nice btn-link'>Akıt</button>");
 
-                $("#entry-header").append("<span style='margin-left: 20px;'>Şukela:</spanstyle> <button id='nice' value='nice' class='nice btn-link'>Tümü</button>|" +
+                $("#entry-header").append("<span style='margin-left: 20px; font-size: 15px;'>Şukela:</span> <button id='nice' value='nice' class='nice btn-link'>Tümü</button>|" +
                     "<button id='dailynice' value='dailynice' class='btn-link nice'>Bugün</button>");
                 $("#entry-header").append("<li style='display: none;' id='firstentry'>" + first_entry.html() + "</li>");
                 fix_link($("#entry-header h1 a"));
