@@ -36,12 +36,13 @@
 }
 #gundem{
     margin: 7px;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .content {
     margin-bottom: 5px;
     overflow: hidden;
-    max-height: 237px;
     position: relative;
 }
 
@@ -95,6 +96,20 @@ li a{
     display: block;
     margin: 10px;
     background: #f2f2f2;
+
+    background-clip: padding-box;
+    border-radius: 13px;
+    width: 98%;
+
+
+}
+
+#entry-header li {
+    padding: 10px 15px 25px 15px;
+    display: block;
+    margin: 10px;
+    background: #f2f2e2;
+
     background-clip: padding-box;
     border-radius: 13px;
     width: 98%;
@@ -117,16 +132,17 @@ li a{
 }
 
 
-#logo{
+
+#logo a{
     font-size: 30px;
     color: white;
-    float: left;
 }
 
-#debearsivi{
-    font-size: 30px;
+
+
+#debearsivi a{
     color: white;
-    float: right;
+    font-size: 30px;
 }
 
 #greeting{
@@ -134,11 +150,11 @@ li a{
 }
 
 
-::-webkit-scrollbar {
+#gundem-content::-webkit-scrollbar {
     display: none;
 }
 
-#ilk {
+#entry-header button {
     margin: 10px;
     border: none;
     cursor: pointer;
