@@ -135,6 +135,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#entry-header .nice', function () {
+        if ($(this).css("font-weight") == "bold") return;
         $("#progresbar").show();
 
         $("#entry-header .nice").css("font-weight", "normal");
