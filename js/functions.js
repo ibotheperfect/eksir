@@ -44,7 +44,7 @@ function get_nice(link) {
         //get page
         $.get(link + "&p=" + i, function (data) {
             var html = $.parseHTML(data);
-            $(html).find("#entry-list li").each(function () {
+            $(html).find("#entry-item-list li").each(function () {
 
                 //fix links
                 $(this).find(".b").each(function () {
@@ -82,7 +82,7 @@ function get_live(link) {
             var html = $.parseHTML(data);
             var pagecountnew = $(html).find(".pager").first().attr("data-pagecount");
 
-            $(html).find("#entry-list li").each(function () {
+            $(html).find("#entry-item-list li").each(function () {
                 var entryid = $(this).attr("data-id");
                 if (entryid > lastentryid) {
 
@@ -181,7 +181,7 @@ $(document).ready(function () {
                 $("#entry-header").empty();
                 $("#entry-header").html($(html).find("#title"));
 
-                var first_entry = $(html).find("#entry-list li").first();
+                var first_entry = $(html).find("#entry-item-list li").first();
 
                 //add butttons
                 $("#entry-header").append("<button id='ilk' class='btn-link'>İlk Entry</button>");
