@@ -105,12 +105,12 @@ function get_live(link) {
                 pagecount = pagecountnew;
             }
         });
-    }, 2000);
+    }, 5000);
 }
 
 $(document).ready(function () {
 
-    jQuery.ajaxSetup({async: false});
+    jQuery.ajaxSetup({async: false, timeout: 4000});
 
     $("#progresbar").progressbar();
     $("#progresbar").progressbar("option", "value", false);
