@@ -105,7 +105,7 @@ function get_live(link) {
                 pagecount = pagecountnew;
             }
         });
-    }, 5000);
+    }, 2000);
 }
 
 $(document).ready(function () {
