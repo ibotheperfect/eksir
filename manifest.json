@@ -1,25 +1,29 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "EkşiR",
-  "description": "Ekşisözlüğü canlı takip edin.",
-  "version": "1.15",
+    "name": "EkşiR",
+    "description": "Ekşisözlüğü canlı takip edin.",
+    "version": "1.16",
 
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
 
-  "browser_action":{
-    "default_icon": "css/images/favicon.png",
-    "default_title": "EkşiR - Modern ekşisözlük"
-  },
-
-  "permissions": [
-    "activeTab",
-    "https://eksisozluk.com/"
-  ],
-  "background": {
-    "scripts": ["js/background.js"],
-    "persistent": false
-  },
-  "homepage_url": "http://eksir.com"
+    "browser_action":{
+        "default_icon": "css/images/favicon.png",
+        "default_title": "EkşiR - Modern ekşisözlük"
+    },
+    "icons": {
+        "16": "css/images/icon16.png",
+        "48": "css/images/icon48.png",
+        "128": "css/images/icon128.png"
+    },
+    "permissions": [
+        "activeTab",
+        "https://eksisozluk.com/"
+    ],
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+    "homepage_url": "http://eksir.com"
 }
