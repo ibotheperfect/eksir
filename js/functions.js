@@ -47,36 +47,42 @@ function fix_link(elem) {
     $(elem).attr("target", "_blank");
 }
 
-function get_nice(link) {
-    var maxpage = 3;
-    for (var i = 1; i <= maxpage; i++) {
-        //get page
-        $.ajax({
-            url: link + "&p=" + i,
-            type: 'GET',
-            timeout: 10000,
-            success: function (data) {
-                var html = $.parseHTML(data);
-                $(html).find("#entry-item-list li").each(function () {
+function get_nice(link, curpage) {
+    //get page
+    $.ajax({
+        url: link + "&p=" + curpage,
+        type: 'GET',
+        timeout: 10000,
+        success: function (data) {
+            var html = $.parseHTML(data);
+            $(html).find("#entry-item-list li").each(function () {
 
-                    //fix links
-                    $(this).find(".b").each(function () {
-                        fix_link(this);
-                    });
-                    fix_link($(this).find(".entry-date"));
-                    fix_link($(this).find(".entry-author"));
-                    $("#entry-nice" + i).append("<li class='col'>" + $(this).html() + "</li>");
-
-
+                //fix links
+                $(this).find(".b").each(function () {
+                    fix_link(this);
                 });
-            },
-            error: function () {
-                console.log("Can not get page " + i);
+                fix_link($(this).find(".entry-date"));
+                fix_link($(this).find(".entry-author"));
+                $("#entry-nice").append("<li class='col'>" + $(this).html() + "</li>");
+
+
+            });
+            if ($(html).find(".pager").exists()) {
+                var nicepagecount = $(html).find(".pager").first().attr("data-pagecount");
+                if (curpage < 3 && nicepagecount > curpage) {
+                    get_nice(link, curpage + 1);
+                } else {
+                    return;
+                }
+            } else {
+                return;
             }
+        },
+        error: function () {
+            console.log("Can not get page " + curpage);
+        }
 
-        });
-
-    }
+    });
 }
 
 function get_live(link) {
@@ -154,9 +160,9 @@ $(document).ready(function () {
 
         $("#entry-header .nice").css("font-weight", "normal");
         $(this).css("font-weight", "bold");
-        for (var i = 1; i < 6; i++) {
-            $("#entry-nice" + i).empty();
-        }
+
+        $("#entry-nice").empty();
+
 
         if ($(this).attr("id") == "live") {
             $("#entry-live").css("display", "block");
@@ -165,7 +171,7 @@ $(document).ready(function () {
             clearInterval(setintervalid);
             $("#entry-live").css("display", "none");
 
-            get_nice(basliklink + "?a=" + $(this).val());
+            get_nice(basliklink + "?a=" + $(this).val(), 1);
         }
         $("#progresbar").hide();
 
@@ -175,9 +181,9 @@ $(document).ready(function () {
         $("#entry-live").empty();
         $("#entry-live").css("display", "block");
         $("#entry-header").empty();
-        for (var i = 1; i < 6; i++) {
-            $("#entry-nice" + i).empty();
-        }
+
+        $("#entry-nice").empty();
+
         clearInterval(setintervalid);
 
         $("#progresbar").show();
