@@ -3,7 +3,7 @@
 
     "name": "EkşiR",
     "description": "Ekşisözlüğü canlı takip edin.",
-    "version": "1.17",
+    "version": "1.18",
 
     "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 

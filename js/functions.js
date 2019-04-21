@@ -87,46 +87,42 @@ function get_nice(link, curpage) {
 
 function get_live(link) {
 
-    setintervalid = setInterval(function () {
+    //get lasest page
+    $.ajax({
+        url: link + "?p=" + pagecount,
+        type: 'GET',
+        timeout: 10000,
+        success: function (data) {
+            var html = $.parseHTML(data);
+            var pagecountnew = $(html).find(".pager").first().attr("data-pagecount");
 
+            $(html).find("#entry-item-list li").each(function () {
+                var entryid = $(this).attr("data-id");
+                if (entryid > lastentryid) {
 
-        //get lasest page
-        $.ajax({
-            url: link + "?p=" + pagecount,
-            type: 'GET',
-            timeout: 10000,
-            success: function (data) {
-                var html = $.parseHTML(data);
-                var pagecountnew = $(html).find(".pager").first().attr("data-pagecount");
-
-                $(html).find("#entry-item-list li").each(function () {
-                    var entryid = $(this).attr("data-id");
-                    if (entryid > lastentryid) {
-
-                        //fix links
-                        $(this).find(".b").each(function () {
-                            fix_link(this);
-                        });
-                        fix_link($(this).find(".entry-date"));
-                        fix_link($(this).find(".entry-author"));
-                        $("#entry-live").prepend("<li class='col'>" + $(this).html() + "</li>");
-                        lastentryid = entryid;
-                        $('#entry-live li').first().delay(0).fadeOut().fadeIn('slow');
-                    }
-                });
-
-                if (pagecountnew == pagecount) {
-                    $("#progresbar").hide();
-                } else {
-                    pagecount = pagecountnew;
+                    //fix links
+                    $(this).find(".b").each(function () {
+                        fix_link(this);
+                    });
+                    fix_link($(this).find(".entry-date"));
+                    fix_link($(this).find(".entry-author"));
+                    $("#entry-live").prepend("<li class='col'>" + $(this).html() + "</li>");
+                    lastentryid = entryid;
+                    $('#entry-live li').first().delay(0).fadeOut().fadeIn('slow');
                 }
-            },
-            error: function () {
-                console.log("Can not get page " + pagecount);
-            }
+            });
 
-        });
-    }, 2000);
+            if (pagecountnew == pagecount) {
+                $("#progresbar").hide();
+            } else {
+                pagecount = pagecountnew;
+            }
+        },
+        error: function () {
+            console.log("Can not get page " + pagecount);
+        }
+
+    });
 }
 
 $(document).ready(function () {
@@ -166,7 +162,9 @@ $(document).ready(function () {
 
         if ($(this).attr("id") == "live") {
             $("#entry-live").css("display", "block");
-            get_live(basliklink);
+            setintervalid = setInterval(function () {
+                get_live(basliklink);
+            }, 2000);
         } else {
             clearInterval(setintervalid);
             $("#entry-live").css("display", "none");
@@ -227,6 +225,9 @@ $(document).ready(function () {
 
                 }
                 get_live(basliklink);
+                setintervalid = setInterval(function () {
+                    get_live(basliklink);
+                }, 2000);
             },
             error: function () {
                 $("#entry-header").append("<span>Ekşisözlüğe bağlanılamıyor.</span>");
