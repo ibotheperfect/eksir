@@ -11,8 +11,8 @@ $.fn.exists = function () {
     return this.length !== 0;
 };
 
-function get_gundem(url) {
-
+function get_titles(url, title) {
+    $("#gundem-content section").html("");
     $.ajax({
         url: url,
         type: "GET",
@@ -28,16 +28,17 @@ function get_gundem(url) {
             $(html).find("li a").each(function () {
                 var val = jQuery.attr(this, "href");
                 jQuery.attr(this, "data-href", val);
+                jQuery.attr(this, "data-title", title);
                 jQuery.removeAttr(this, "href");
             });
 
             //put content into div
-            $("#gundem-topics").html($(html).find("#content-body .topic-list li"));
+            $("#" + title + "-topics").html($(html).find("#content-body .topic-list li"));
             $("#content-body .full-index-continue-link-container").remove();
             $("#content-body .topic-list-description").remove();
         },
         error: function () {
-            $("#gundem-topics").html("Ekşisözlüğe erişilemiyor");
+            $("#" + title + "-topics").html("Ekşisözlüğe erişilemiyor");
         }
     });
 }
@@ -132,7 +133,7 @@ $(document).ready(function () {
     $("#progresbar").progressbar();
     $("#progresbar").progressbar("option", "value", false);
     $("#progresbar").hide();
-    get_gundem("https://eksisozluk.com/basliklar/gundem");
+    get_titles("https://eksisozluk.com/basliklar/gundem", "gundem");
 
     $(document).on('click', '#ilk', function () {
         var vis = $("#firstentry").css("display");
@@ -147,7 +148,11 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#gundem', function () {
-        get_gundem("https://eksisozluk.com/basliklar/gundem");
+        get_titles("https://eksisozluk.com/basliklar/gundem", "gundem");
+    });
+
+    $(document).on('click', '#debe', function () {
+        get_titles("https://eksisozluk.com/debe", "debe");
     });
 
     $(document).on('click', '#entry-header .nice', function () {
@@ -174,8 +179,7 @@ $(document).ready(function () {
         $("#progresbar").hide();
 
     });
-
-    $(document).on('click', '#gundem-content li a', function () {
+    $(document).on('click', '#debe-topics li a', function () {
         $("#entry-live").empty();
         $("#entry-live").css("display", "block");
         $("#entry-header").empty();
@@ -184,7 +188,58 @@ $(document).ready(function () {
 
         clearInterval(setintervalid);
 
-        $("#progresbar").show();
+        basliklink = "https://eksisozluk.com/" + $(this).attr("data-href");
+
+        $.ajax({
+            url: basliklink,
+            type: 'GET',
+            timeout: 10000,
+            beforeSend: function () {
+                $("#progresbar").show();
+            },
+            success: function (data) {
+                $("#progresbar").hide();
+                var html = $.parseHTML(data);
+
+                $("#entry-header").empty();
+                $("#entry-header").html($(html).find("#title"));
+                fix_link($("#entry-header h1 a"));
+
+                //fix links
+                $("#entry-header .b").each(function () {
+                    fix_link(this);
+                });
+                fix_link($("#entry-header .entry-date"));
+                fix_link($("#entry-header .entry-author"));
+
+                var first_entry = $(html).find("#entry-item-list li").first();
+                //fix links
+                first_entry.find(".b").each(function () {
+                    fix_link(this);
+                });
+                fix_link(first_entry.find(".entry-date"));
+                fix_link(first_entry.find(".entry-author"));
+                $("#entry-live").prepend("<li class='col'>" + first_entry.html() + "</li>");
+
+
+            },
+            error: function () {
+                $("#progresbar").hide();
+                $("#entry-header").append("<span>Ekşisözlüğe bağlanılamıyor.</span>");
+            }
+
+        });
+    });
+
+    $(document).on('click', '#gundem-topics li a', function () {
+        $("#entry-live").empty();
+        $("#entry-live").css("display", "block");
+        $("#entry-header").empty();
+
+        $("#entry-nice").empty();
+
+        clearInterval(setintervalid);
+
         lastentryid = 0;
 
         basliklink = "https://eksisozluk.com/" + $(this).attr("data-href");
@@ -196,6 +251,9 @@ $(document).ready(function () {
             url: basliklink,
             type: 'GET',
             timeout: 10000,
+            beforeSend: function () {
+                $("#progresbar").show();
+            },
             success: function (data) {
                 var html = $.parseHTML(data);
                 pagecount = $(html).find(".pager").first().attr("data-pagecount");
@@ -230,6 +288,7 @@ $(document).ready(function () {
                 }, 2000);
             },
             error: function () {
+                $("#progresbar").hide();
                 $("#entry-header").append("<span>Ekşisözlüğe bağlanılamıyor.</span>");
             }
 

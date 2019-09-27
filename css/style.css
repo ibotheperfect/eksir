@@ -34,10 +34,10 @@
 #gundem-content li{
     margin: 7px;
 }
-#gundem{
+#gundem, #debe{
     margin: 7px;
     cursor: pointer;
-    font-size: 20px;
+    /* font-size: 20px;*/
 }
 
 .content {
